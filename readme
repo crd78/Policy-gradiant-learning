@@ -1,0 +1,100 @@
+CartPole Policy Gradient Agent
+
+Description
+
+Ce projet implémente un agent basé sur la méthode de Policy Gradient pour résoudre l'environnement CartPole-v1 de OpenAI Gym. L'agent apprend à équilibrer le poteau en appliquant des actions optimales basées sur l'état observé.
+
+Structure du Projet
+
+Policy-gradient/
+├── Agent/
+│   └── Agent.py
+├── Env/
+│   └── env.py
+├── saved_models/
+│   └── policy_net_best.pth
+├── main.py
+├── train.py
+├── requirements.txt
+└── README.md
+
+Installation
+
+1. Cloner le dépôt
+
+git clone https://github.com/crd78/Policy-gradient.git
+cd Policy-gradient
+
+2. Créer un environnement virtuel (optionnel mais recommandé)
+
+python -m venv venv
+source venv/bin/activate  # Sous Windows: venv\Scripts\activate
+
+3. Installer les dépendances
+
+pip install -r requirements.txt
+
+Utilisation
+
+Entraîner l'Agent
+
+Pour entraîner l'agent basé sur Policy Gradient, exécutez :
+
+python train.py
+
+L'agent sera entraîné pendant 10 000 épisodes.
+Les modèles avec de meilleures performances seront sauvegardés dans le dossier saved_models.
+
+Tester l'Agent
+
+Pour tester l'agent entraîné et visualiser ses performances :
+
+python main.py
+
+Performance
+
+Objectif : Survivre 400 étapes sans que le poteau ne tombe.
+
+Récompenses
+
+Récompense par étape : +1 pour chaque étape réussie.
+
+Récompense de succès : +10 après avoir atteint 400 étapes.
+
+Pénalité d'échec : -10 si le poteau tombe avant 400 étapes.
+
+Architecture
+
+Réseau de Politique (Policy Network)
+
+Couche d'entrée : 64 neurones (état aplati avec empilement de frames)
+
+Couches cachées : 128 → 64 → 32 neurones avec activations ReLU
+
+Couche de sortie : 2 neurones (actions) avec activation Softmax
+
+Empilement de Frames (Frame Stacking)
+
+Utilisation d'un empilement de 4 frames pour capturer les informations temporelles.
+
+Optimiseur
+
+Adam avec un taux d'apprentissage de 1e-3.
+
+Dépendances
+
+Python 3.11
+
+PyTorch
+
+OpenAI Gym
+
+NumPy
+
+Matplotlib
+
+Notes
+
+Assurez-vous que le dossier saved_models existe ou est créé automatiquement pour stocker les modèles entraînés.
+
+Ajustez les hyperparamètres dans Agent.py et env.py pour expérimenter différentes configurations.
